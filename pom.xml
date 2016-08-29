@@ -17,6 +17,8 @@
     <commons-codec.version>1.10</commons-codec.version>
     <joda-time.version>2.9.4</joda-time.version>
     <slf4j.version>1.7.21</slf4j.version>
+    <testng.version>6.9.10</testng.version>
+    <mockito-all.version>1.10.19</mockito-all.version>
 
     <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
@@ -26,8 +28,7 @@
     <nexus-staging-maven-plugin.version>1.6.7</nexus-staging-maven-plugin.version>
 
     <java.version>1.7</java.version>
-    <testng.version>6.9.10</testng.version>
-    <mockito-all.version>1.10.19</mockito-all.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <dependencyManagement>
