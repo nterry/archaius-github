@@ -1,34 +1,40 @@
 package io.github.nterry.archaius.github.config;
 
-import com.google.gson.annotations.SerializedName;
+import com.google.api.client.util.Key;
 
-class GitHubLinks {
+public class GitHubLinks {
 
-  @SerializedName("git")
+  @Key
   private String git;
 
-  @SerializedName("self")
+  @Key
   private String self;
 
-  @SerializedName("html")
+  @Key
   private String html;
 
-  GitHubLinks(String git, String self, String html) {
-    this.git = git;
-    this.self = self;
-    this.html = html;
-  }
-
-  String getGit() {
+  public String getGit() {
     return git;
   }
 
-  String getSelf() {
+  public void setGit(String git) {
+    this.git = git;
+  }
+
+  public String getSelf() {
     return self;
   }
 
-  String getHtml() {
+  public void setSelf(String self) {
+    this.self = self;
+  }
+
+  public String getHtml() {
     return html;
+  }
+
+  public void setHtml(String html) {
+    this.html = html;
   }
 
   @Override

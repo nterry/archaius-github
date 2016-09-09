@@ -1,108 +1,142 @@
 package io.github.nterry.archaius.github.config;
 
-import com.google.gson.annotations.SerializedName;
+//import com.google.gson.annotations.SerializedName;
 
-class GitHubContents {
+import com.google.api.client.util.Key;
 
-  @SerializedName("type")
+public class GitHubContents {
+
+  @Key
   private String type;
 
-  @SerializedName("encoding")
+  @Key
   private String encoding;
 
-  @SerializedName("size")
+  @Key
   private int size;
 
-  @SerializedName("name")
+  @Key
   private String name;
 
-  @SerializedName("path")
+  @Key
   private String path;
 
-  @SerializedName("content")
+  @Key
   private String content;
 
-  @SerializedName("sha")
+  @Key
   private String sha;
 
-  @SerializedName("url")
+  @Key
   private String url;
 
-  @SerializedName("git_url")
+  @Key("git_url")
   private String gitUrl;
 
-  @SerializedName("html_url")
+  @Key("html_url")
   private String htmlUrl;
 
-  @SerializedName("download_url")
+  @Key("download_url")
   private String downloadUrl;
 
-  @SerializedName("_links")
+  @Key("_links")
   private GitHubLinks links;
 
 
-  GitHubContents(String type, String encoding, int size, String name, String path, String content, String sha, String url, String gitUrl,
-                        String htmlUrl, String downloadUrl, GitHubLinks links) {
-    this.type = type;
-    this.encoding = encoding;
-    this.size = size;
-    this.name = name;
-    this.path = path;
-    this.content = content;
-    this.sha = sha;
-    this.url = url;
-    this.gitUrl = gitUrl;
-    this.htmlUrl = htmlUrl;
-    this.downloadUrl = downloadUrl;
-    this.links = links;
-  }
-
-  String getType() {
+  public String getType() {
     return type;
   }
 
-  String getEncoding() {
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public String getEncoding() {
     return encoding;
   }
 
-  int getSize() {
+  public void setEncoding(String encoding) {
+    this.encoding = encoding;
+  }
+
+  public int getSize() {
     return size;
   }
 
-  String getName() {
+  public void setSize(int size) {
+    this.size = size;
+  }
+
+  public String getName() {
     return name;
   }
 
-  String getPath() {
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getPath() {
     return path;
   }
 
-  String getContent() {
+  public void setPath(String path) {
+    this.path = path;
+  }
+
+  public String getContent() {
     return content;
   }
 
-  String getSha() {
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+  public String getSha() {
     return sha;
   }
 
-  String getUrl() {
+  public void setSha(String sha) {
+    this.sha = sha;
+  }
+
+  public String getUrl() {
     return url;
   }
 
-  String getGitUrl() {
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
+  public String getGitUrl() {
     return gitUrl;
   }
 
-  String getHtmlUrl() {
+  public void setGitUrl(String gitUrl) {
+    this.gitUrl = gitUrl;
+  }
+
+  public String getHtmlUrl() {
     return htmlUrl;
   }
 
-  String getDownloadUrl() {
+  public void setHtmlUrl(String htmlUrl) {
+    this.htmlUrl = htmlUrl;
+  }
+
+  public String getDownloadUrl() {
     return downloadUrl;
   }
 
-  GitHubLinks getLinks() {
+  public void setDownloadUrl(String downloadUrl) {
+    this.downloadUrl = downloadUrl;
+  }
+
+  public GitHubLinks getLinks() {
     return links;
+  }
+
+  public void setLinks(GitHubLinks links) {
+    this.links = links;
   }
 
   @Override

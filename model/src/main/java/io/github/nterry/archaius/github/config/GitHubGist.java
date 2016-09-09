@@ -3,66 +3,66 @@ package io.github.nterry.archaius.github.config;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gson.annotations.SerializedName;
+import com.google.api.client.util.Key;
 import org.joda.time.DateTime;
 
-class GitHubGist {
+public class GitHubGist {
 
-  @SerializedName("url")
+  @Key
   private String url;
 
-  @SerializedName("forks_url")
+  @Key("forks_url")
   private String forksUrl;
 
-  @SerializedName("commits_url")
+  @Key("commits_url")
   private String commitsUrl;
 
-  @SerializedName("id")
+  @Key
   private String id;
 
-  @SerializedName("description")
+  @Key
   private String description;
 
-  @SerializedName("public")
+  @Key
   private boolean publc;
 
-  @SerializedName("owner")
+  @Key
   private GitHubUser owner;
 
-  @SerializedName("user")
+  @Key
   private GitHubUser user;
 
-  @SerializedName("files")
+  @Key
   private Map<String, GitHubFile> files;
 
-  @SerializedName("truncated")
+  @Key
   private boolean truncated;
 
-  @SerializedName("comments")
+  @Key
   private int comments;
 
-  @SerializedName("comments_url")
+  @Key
   private String commentsUrl;
 
-  @SerializedName("html_url")
+  @Key("html_url")
   private String htmlUrl;
 
-  @SerializedName("git_pull_url")
+  @Key("git_pull_url")
   private String gitPullUrl;
 
-  @SerializedName("git_push_url")
+  @Key("git_push_url")
   private String gitPushUrl;
 
-  @SerializedName("created_at")
+  @Key("created_at")
   private DateTime createdAt;
 
-  @SerializedName("updated_at")
+  @Key("updated_at")
   private DateTime updatedAt;
 
-  @SerializedName("forks")
+  @Key
   private List<GitHubUser> forks;
 
-  @SerializedName("history")
+  @Key
   private List<GitHubHistory> history;
 
 
@@ -278,7 +278,7 @@ class GitHubGist {
   @Override
   public String toString() {
     return String.format("GitHubGist{url='%s', forksUrl='%s', commitsUrl='%s', id='%s', description='%s', publc=%s, owner=%s, user=%s, files=%s, truncated=%s, " +
-        "comments=%d, commentsUrl='%s', htmlUrl='%s', gitPullUrl='%s', gitPushUrl='%s', createdAt=%s, updatedAt='%s', forks=%s, history=%s}",
+            "comments=%d, commentsUrl='%s', htmlUrl='%s', gitPullUrl='%s', gitPushUrl='%s', createdAt=%s, updatedAt='%s', forks=%s, history=%s}",
         url, forksUrl, commitsUrl, id, description, publc, owner, user, files, truncated, comments, commentsUrl, htmlUrl, gitPullUrl, gitPushUrl, createdAt,
         updatedAt, forks, history);
   }

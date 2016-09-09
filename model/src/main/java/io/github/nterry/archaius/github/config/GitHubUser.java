@@ -1,58 +1,58 @@
 package io.github.nterry.archaius.github.config;
 
-import com.google.gson.annotations.SerializedName;
+import com.google.api.client.util.Key;
 
-class GitHubUser {
+public class GitHubUser {
 
-  @SerializedName("login")
+  @Key
   private String login;
 
-  @SerializedName("id")
+  @Key
   private int id;
 
-  @SerializedName("avatar_url")
+  @Key("avatar_url")
   private String avatarUrl;
 
-  @SerializedName("gravatar_id")
+  @Key("gravatar_id")
   private String gravatarId;
 
-  @SerializedName("url")
+  @Key
   private String url;
 
-  @SerializedName("html_url")
+  @Key("html_url")
   private String htmlUrl;
 
-  @SerializedName("followers_url")
+  @Key("followers_url")
   private String followersUrl;
 
-  @SerializedName("following_url")
+  @Key("following_url")
   private String followingUrl;
 
-  @SerializedName("gists_url")
+  @Key("gists_url")
   private String gistsUrl;
 
-  @SerializedName("starred_url")
+  @Key("starred_url")
   private String starredUrl;
 
-  @SerializedName("subscriptions_url")
+  @Key("subscriptions_url")
   private String subscriptionsUrl;
 
-  @SerializedName("organizations_url")
+  @Key("organizations_url")
   private String organizationsUrl;
 
-  @SerializedName("repos_url")
+  @Key("repos_url")
   private String reposUrl;
 
-  @SerializedName("events_url")
+  @Key("events_url")
   private String eventsUrl;
 
-  @SerializedName("received_events_url")
+  @Key("received_events_url")
   private String receivedEventsUrl;
 
-  @SerializedName("type")
+  @Key
   private String type;
 
-  @SerializedName("site_admin")
+  @Key
   private boolean siteAdmin;
 
 
@@ -249,8 +249,8 @@ class GitHubUser {
   @Override
   public String toString() {
     return String.format("GitHubUser{login='%s', id=%d, avatarUrl='%s', gravatarId='%s', url='%s', htmlUrl='%s', followersUrl='%s', followingUrl='%s', " +
-        "gistsUrl='%s', starredUrl='%s', subscriptionsUrl='%s', organizationsUrl='%s', reposUrl='%s', eventsUrl='%s', receivedEventsUrl='%s', type='%s', " +
-        "siteAdmin=%s}", login, id, avatarUrl, gravatarId, url, htmlUrl, followersUrl, followingUrl, gistsUrl, starredUrl, subscriptionsUrl, organizationsUrl,
+            "gistsUrl='%s', starredUrl='%s', subscriptionsUrl='%s', organizationsUrl='%s', reposUrl='%s', eventsUrl='%s', receivedEventsUrl='%s', type='%s', " +
+            "siteAdmin=%s}", login, id, avatarUrl, gravatarId, url, htmlUrl, followersUrl, followingUrl, gistsUrl, starredUrl, subscriptionsUrl, organizationsUrl,
         reposUrl, eventsUrl, receivedEventsUrl, type, siteAdmin);
   }
 }

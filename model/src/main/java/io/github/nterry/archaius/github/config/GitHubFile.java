@@ -1,25 +1,25 @@
 package io.github.nterry.archaius.github.config;
 
-import com.google.gson.annotations.SerializedName;
+import com.google.api.client.util.Key;
 
-class GitHubFile {
+public class GitHubFile {
 
-  @SerializedName("size")
+  @Key
   private int size;
 
-  @SerializedName("raw_url")
+  @Key("raw_url")
   private String rawUrl;
 
-  @SerializedName("type")
+  @Key
   private String type;
 
-  @SerializedName("language")
+  @Key
   private String language;
 
-  @SerializedName("truncated")
+  @Key
   private boolean truncated;
 
-  @SerializedName("content")
+  @Key
   private String content;
 
 

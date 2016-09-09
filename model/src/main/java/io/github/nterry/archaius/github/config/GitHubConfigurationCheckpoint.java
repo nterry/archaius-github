@@ -23,6 +23,14 @@ public class GitHubConfigurationCheckpoint {
     this.config = config;
   }
 
+  public static GitHubConfigurationCheckpoint from(Object checkpoint) {
+    if (checkpoint instanceof GitHubConfigurationCheckpoint) {
+      return (GitHubConfigurationCheckpoint) checkpoint;
+    }
+
+    return null;
+  }
+
   /**
    * Returns the eTag associated with this {@link GitHubConfigurationCheckpoint} object.
    *

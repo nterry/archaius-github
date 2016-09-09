@@ -1,5 +1,6 @@
 package io.github.nterry.archaius.github.config;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
@@ -7,35 +8,35 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpHeaders;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.JsonObjectParser;
 import com.netflix.config.PollResult;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.codec.binary.Base64;
 
 
 abstract class AbstractGitHubConfigurationSource {
 
-  private static final Logger LOG = LoggerFactory.getLogger(AbstractGitHubConfigurationSource.class);
-
   static final String API_URL_PREFIX = "https://api.github.com";
 
-  static final String CONTENT_TYPE_HEADER_KEY = "Content-Type";
-  static final String CONTENT_TYPE_VALUE = "application/vnd.github.v3+json";
-
-  static final String CONNECTION_HEADER_KEY = "Connection";
-  static final String CONNECTION_CLOSE_VALUE = "close";
-
-  static final String AUTHORIZATION_HEADER_KEY = "Authorization";
+  private static final String CONTENT_TYPE_VALUE = "application/vnd.github.v3+json";
+  private static final String CONNECTION_HEADER_KEY = "Connection";
+  private static final String CONNECTION_CLOSE_VALUE = "close";
+  private static final String IF_NONE_MATCH_HEADER_KEY = "If-None-Match";
 
   private final GitHubDetails gitHubDetails;
   private final String contentPath;
-  private final HttpClient httpClient;
+  private final HttpTransport httpTransport;
+  private final JsonFactory jsonFactory;
 
-  AbstractGitHubConfigurationSource(GitHubDetails gitHubDetails, String contentPath, HttpClient httpClient) {
+  AbstractGitHubConfigurationSource(GitHubDetails gitHubDetails, String contentPath, HttpTransport httpTransport, JsonFactory jsonFactory) {
     this.gitHubDetails = gitHubDetails;
-    this.contentPath = validateContentPath(contentPath);
-    this.httpClient = httpClient;
+    this.contentPath = sanitizeContentPath(contentPath);
+    this.httpTransport = httpTransport;
+    this.jsonFactory = jsonFactory;
   }
 
   GitHubDetails getGitHubDetails() {
@@ -46,20 +47,63 @@ abstract class AbstractGitHubConfigurationSource {
     return contentPath;
   }
 
-  HttpClient getHttpClient() {
-    return httpClient;
+  HttpTransport getHttpTransport() {
+    return httpTransport;
   }
 
-  abstract String getUrl();
+  String sanitizeContentPath(String contentPath) {
+    // Make a copy of the string
+    String sanitizedString = contentPath;
 
-  abstract PollResult executeRequest(HttpUriRequest request, GitHubConfigurationCheckpoint checkpoint) throws IOException;
-
-  GitHubConfigurationCheckpoint parseCheckpoint(Object checkpoint) {
-    if (checkpoint instanceof GitHubConfigurationCheckpoint) {
-      return (GitHubConfigurationCheckpoint) checkpoint;
+    if (contentPath.startsWith("/")) {
+      sanitizedString = sanitizedString.substring(1);
     }
 
-    return null;
+    if (sanitizedString.endsWith("/")) {
+      sanitizedString = sanitizedString.substring(0, sanitizedString.length() - 1);
+    }
+
+    return sanitizedString;
+  }
+
+  PollResult generatePollResult(GitHubConfigurationCheckpoint gitHubConfigurationCheckpoint) throws IOException {
+    HttpHeaders httpHeaders = new HttpHeaders();
+    httpHeaders.setContentType(CONTENT_TYPE_VALUE);
+    httpHeaders.put(CONNECTION_HEADER_KEY, CONNECTION_CLOSE_VALUE);
+
+    if (null != getGitHubDetails().getOAuthToken()) {
+      httpHeaders.setAuthorization(String.format("Bearer %s", getGitHubDetails().getOAuthToken()));
+    }
+
+    if (gitHubConfigurationCheckpoint != null) {
+      httpHeaders.put(IF_NONE_MATCH_HEADER_KEY, gitHubConfigurationCheckpoint.getEtag());
+    }
+
+    HttpRequest request = getHttpTransport().createRequestFactory().buildGetRequest(getUrl());
+    request.setHeaders(httpHeaders);
+    request.setConnectTimeout(10000);
+    request.setParser(new JsonObjectParser(jsonFactory));
+//    List<String> list = new ArrayList<>();
+//    list.add("type");
+//    list.add("encoding");
+//    list.add("size");
+//    list.add("name");
+//    list.add("path");
+//    list.add("content");
+//    list.add("sha");
+//    list.add("url");
+//    list.add("gitUrl");
+//    list.add("htmlUrl");
+//    list.add("downloadUrl");
+//    list.add("links");
+
+//    request.setParser(new JsonObjectParser.Builder(jsonFactory).setWrapperKeys(list).build());
+
+    return executeRequest(request, gitHubConfigurationCheckpoint);
+  }
+
+  Map<String, Object> decode(String encodedResponse) throws IOException {
+    return parseProperties(new ByteArrayInputStream(Base64.decodeBase64(encodedResponse)));
   }
 
   Map<String, Object> parseProperties(InputStream propertiesInputStream) throws IOException {
@@ -72,13 +116,7 @@ abstract class AbstractGitHubConfigurationSource {
     return Collections.unmodifiableMap(map);
   }
 
+  abstract GenericUrl getUrl();
 
-  private String validateContentPath(String contentPath) {
-    if (null == contentPath || contentPath.isEmpty() || contentPath.startsWith("/") || contentPath.endsWith("/")) {
-      String errorMessage = String.format("Content path provided '%s' is invalid. Path cannot begin or end with a forward slash and cannot be null or empty.", contentPath);
-      LOG.error(errorMessage);
-      throw new IllegalArgumentException(errorMessage);
-    }
-    return contentPath;
-  }
+  abstract PollResult executeRequest(HttpRequest request, GitHubConfigurationCheckpoint checkpoint) throws IOException;
 }

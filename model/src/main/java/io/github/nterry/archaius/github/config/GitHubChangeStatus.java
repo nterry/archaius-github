@@ -1,16 +1,16 @@
 package io.github.nterry.archaius.github.config;
 
-import com.google.gson.annotations.SerializedName;
+import com.google.api.client.util.Key;
 
-class GitHubChangeStatus {
+public class GitHubChangeStatus {
 
-  @SerializedName("deletions")
+  @Key
   private int deletions;
 
-  @SerializedName("additions")
+  @Key
   private int additions;
 
-  @SerializedName("total")
+  @Key
   private int total;
 
 

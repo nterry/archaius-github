@@ -1,23 +1,23 @@
 package io.github.nterry.archaius.github.config;
 
-import com.google.gson.annotations.SerializedName;
+import com.google.api.client.util.Key;
 import org.joda.time.DateTime;
 
-class GitHubHistory {
+public class GitHubHistory {
 
-  @SerializedName("url")
+  @Key
   private String url;
 
-  @SerializedName("version")
+  @Key
   private String version;
 
-  @SerializedName("user")
+  @Key
   private GitHubUser user;
 
-  @SerializedName("change_status")
+  @Key
   private GitHubChangeStatus changeStatus;
 
-  @SerializedName("committed_at")
+  @Key
   private DateTime committedAt;
 
 

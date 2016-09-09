@@ -18,22 +18,19 @@ public class GitHubDetails {
    * Creates an instance with the given GitHub repository owner and repository name.
    * Suitable for public repositories or other anonymous sources.
    *
-   * @param repositoryOwner The repository owner. Must not be null or empty
-   * @param repositoryName The repository name. Must not be null or empty
-   * @throws IllegalArgumentException if any of the given parameters are invalid
+   * @param repositoryOwner The repository owner
+   * @param repositoryName The repository name
    */
   public GitHubDetails(String repositoryOwner, String repositoryName) {
     this(repositoryOwner, repositoryName, null);
   }
 
   /**
-   *
    * Creates an instance with the given GitHub repository owner, repository name, and OAuth token.
    *
-   * @param repositoryOwner The repository owner. Must not be null or empty
-   * @param repositoryName The repository name. Must not be null or empty
-   * @param oAuthToken The OAuth token to include with request(s). Can be null, but must not be empty
-   * @throws IllegalArgumentException if any of the given parameters are invalid
+   * @param repositoryOwner The repository owner
+   * @param repositoryName The repository name
+   * @param oAuthToken The OAuth token to include with request(s)
    */
   public GitHubDetails(String repositoryOwner, String repositoryName, String oAuthToken) {
     this.repositoryOwner = validateParameterNullOrEmpty("repositoryOwner", repositoryOwner);
@@ -41,6 +38,23 @@ public class GitHubDetails {
     this.oAuthToken = validateParameterEmpty("oAuthToken", oAuthToken);
   }
 
+  private static String validateParameterNullOrEmpty(String parameter, String value) {
+    if (null == value || value.isEmpty()) {
+      String errorMessage = String.format("Provided parameter '%s' must not be null or empty. Provided value was '%s'.", parameter, value);
+      throw new IllegalArgumentException(errorMessage);
+    }
+
+    return value;
+  }
+
+  private static String validateParameterEmpty(String parameter, String value) {
+    if (null != value && value.isEmpty()) {
+      String errorMessage = String.format("Provided parameter '%s' must not be empty.", parameter);
+      throw new IllegalArgumentException(errorMessage);
+    }
+
+    return value;
+  }
 
   public String getRepositoryOwner() {
     return repositoryOwner;
@@ -122,24 +136,5 @@ public class GitHubDetails {
     result = 31 * result + (getBranchName() != null ? getBranchName().hashCode() : 0);
     result = 31 * result + (getOAuthToken() != null ? getOAuthToken().hashCode() : 0);
     return result;
-  }
-
-
-  private static String validateParameterNullOrEmpty(String parameter, String value) {
-    if (null == value || value.isEmpty()) {
-      String errorMessage = String.format("Provided parameter '%s' must not be null or empty. Provided value was '%s'.", parameter, value);
-      throw new IllegalArgumentException(errorMessage);
-    }
-
-    return value;
-  }
-
-  private static String validateParameterEmpty(String parameter, String value) {
-    if (null != value && value.isEmpty()) {
-      String errorMessage = String.format("Provided parameter '%s' must not be empty.", parameter);
-      throw new IllegalArgumentException(errorMessage);
-    }
-
-    return value;
   }
 }
