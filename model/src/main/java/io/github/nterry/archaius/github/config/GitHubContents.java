@@ -1,7 +1,5 @@
 package io.github.nterry.archaius.github.config;
 
-//import com.google.gson.annotations.SerializedName;
-
 import com.google.api.client.util.Key;
 
 public class GitHubContents {

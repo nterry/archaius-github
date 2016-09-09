@@ -68,7 +68,7 @@ public class GitHubRepositoryConfigurationSource extends AbstractGitHubConfigura
         return PollResult.createFull(checkpoint.getConfig());
       }
       else if (ex.getStatusCode() == HttpStatusCodes.STATUS_CODE_NOT_FOUND) {
-        String errorMessage = "Requested content does not appear to exist, or you do not hve access to it.";
+        String errorMessage = "Requested content does not appear to exist, or you do not have access to it.";
 
         LOG.error(errorMessage, ex);
         throw new IOException(errorMessage, ex);

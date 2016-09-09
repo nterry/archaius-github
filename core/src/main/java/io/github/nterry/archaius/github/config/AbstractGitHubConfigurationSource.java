@@ -25,7 +25,6 @@ abstract class AbstractGitHubConfigurationSource {
   private static final String CONTENT_TYPE_VALUE = "application/vnd.github.v3+json";
   private static final String CONNECTION_HEADER_KEY = "Connection";
   private static final String CONNECTION_CLOSE_VALUE = "close";
-  private static final String IF_NONE_MATCH_HEADER_KEY = "If-None-Match";
 
   private final GitHubDetails gitHubDetails;
   private final String contentPath;
@@ -76,28 +75,13 @@ abstract class AbstractGitHubConfigurationSource {
     }
 
     if (gitHubConfigurationCheckpoint != null) {
-      httpHeaders.put(IF_NONE_MATCH_HEADER_KEY, gitHubConfigurationCheckpoint.getEtag());
+      httpHeaders.setIfNoneMatch(gitHubConfigurationCheckpoint.getEtag());
     }
 
     HttpRequest request = getHttpTransport().createRequestFactory().buildGetRequest(getUrl());
     request.setHeaders(httpHeaders);
     request.setConnectTimeout(10000);
     request.setParser(new JsonObjectParser(jsonFactory));
-//    List<String> list = new ArrayList<>();
-//    list.add("type");
-//    list.add("encoding");
-//    list.add("size");
-//    list.add("name");
-//    list.add("path");
-//    list.add("content");
-//    list.add("sha");
-//    list.add("url");
-//    list.add("gitUrl");
-//    list.add("htmlUrl");
-//    list.add("downloadUrl");
-//    list.add("links");
-
-//    request.setParser(new JsonObjectParser.Builder(jsonFactory).setWrapperKeys(list).build());
 
     return executeRequest(request, gitHubConfigurationCheckpoint);
   }

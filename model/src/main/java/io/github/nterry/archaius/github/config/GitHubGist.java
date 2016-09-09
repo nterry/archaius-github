@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.api.client.util.Key;
-import org.joda.time.DateTime;
 
 public class GitHubGist {
 
@@ -53,11 +52,12 @@ public class GitHubGist {
   @Key("git_push_url")
   private String gitPushUrl;
 
-  @Key("created_at")
-  private DateTime createdAt;
-
-  @Key("updated_at")
-  private DateTime updatedAt;
+  // TODO: Need to fins a way to get google's JsonFactory to deserialize this type...
+//  @Key("created_at")
+//  private DateTime createdAt;
+//
+//  @Key("updated_at")
+//  private DateTime updatedAt;
 
   @Key
   private List<GitHubUser> forks;
@@ -186,21 +186,21 @@ public class GitHubGist {
     this.gitPushUrl = gitPushUrl;
   }
 
-  DateTime getCreatedAt() {
-    return createdAt;
-  }
-
-  void setCreatedAt(DateTime createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  DateTime getUpdatedAt() {
-    return updatedAt;
-  }
-
-  void setUpdatedAt(DateTime updatedAt) {
-    this.updatedAt = updatedAt;
-  }
+//  DateTime getCreatedAt() {
+//    return createdAt;
+//  }
+//
+//  void setCreatedAt(DateTime createdAt) {
+//    this.createdAt = createdAt;
+//  }
+//
+//  DateTime getUpdatedAt() {
+//    return updatedAt;
+//  }
+//
+//  void setUpdatedAt(DateTime updatedAt) {
+//    this.updatedAt = updatedAt;
+//  }
 
   List<GitHubUser> getForks() {
     return forks;
@@ -244,10 +244,10 @@ public class GitHubGist {
                                             (getHtmlUrl() != null ? getHtmlUrl().equals(that.getHtmlUrl()) : that.getHtmlUrl() == null &&
                                                 (getGitPullUrl() != null ? getGitPullUrl().equals(that.getGitPullUrl()) : that.getGitPullUrl() == null &&
                                                     (getGitPushUrl() != null ? getGitPushUrl().equals(that.getGitPushUrl()) : that.getGitPushUrl() == null &&
-                                                        (getCreatedAt() != null ? getCreatedAt().equals(that.getCreatedAt()) : that.getCreatedAt() == null &&
-                                                            (getUpdatedAt() != null ? getUpdatedAt().equals(that.getUpdatedAt()) : that.getUpdatedAt() == null &&
-                                                                (getForks() != null ? getForks().equals(that.getForks()) : that.getForks() == null &&
-                                                                    (getHistory() != null ? getHistory().equals(that.getHistory()) : that.getHistory() == null))))))))))))))));
+//                                                        (getCreatedAt() != null ? getCreatedAt().equals(that.getCreatedAt()) : that.getCreatedAt() == null &&
+//                                                            (getUpdatedAt() != null ? getUpdatedAt().equals(that.getUpdatedAt()) : that.getUpdatedAt() == null &&
+                                                        (getForks() != null ? getForks().equals(that.getForks()) : that.getForks() == null &&
+                                                            (getHistory() != null ? getHistory().equals(that.getHistory()) : that.getHistory() == null))))))))))))));
 
   }
 
@@ -268,8 +268,8 @@ public class GitHubGist {
     result = 31 * result + (getHtmlUrl() != null ? getHtmlUrl().hashCode() : 0);
     result = 31 * result + (getGitPullUrl() != null ? getGitPullUrl().hashCode() : 0);
     result = 31 * result + (getGitPushUrl() != null ? getGitPushUrl().hashCode() : 0);
-    result = 31 * result + (getCreatedAt() != null ? getCreatedAt().hashCode() : 0);
-    result = 31 * result + (getUpdatedAt() != null ? getUpdatedAt().hashCode() : 0);
+//    result = 31 * result + (getCreatedAt() != null ? getCreatedAt().hashCode() : 0);
+//    result = 31 * result + (getUpdatedAt() != null ? getUpdatedAt().hashCode() : 0);
     result = 31 * result + (getForks() != null ? getForks().hashCode() : 0);
     result = 31 * result + (getHistory() != null ? getHistory().hashCode() : 0);
     return result;
@@ -278,8 +278,8 @@ public class GitHubGist {
   @Override
   public String toString() {
     return String.format("GitHubGist{url='%s', forksUrl='%s', commitsUrl='%s', id='%s', description='%s', publc=%s, owner=%s, user=%s, files=%s, truncated=%s, " +
-            "comments=%d, commentsUrl='%s', htmlUrl='%s', gitPullUrl='%s', gitPushUrl='%s', createdAt=%s, updatedAt='%s', forks=%s, history=%s}",
-        url, forksUrl, commitsUrl, id, description, publc, owner, user, files, truncated, comments, commentsUrl, htmlUrl, gitPullUrl, gitPushUrl, createdAt,
-        updatedAt, forks, history);
+            "comments=%d, commentsUrl='%s', htmlUrl='%s', gitPullUrl='%s', gitPushUrl='%s', createdAt=, updatedAt=, forks=%s, history=%s}",
+        url, forksUrl, commitsUrl, id, description, publc, owner, user, files, truncated, comments, commentsUrl, htmlUrl, gitPullUrl, gitPushUrl,
+        forks, history);
   }
 }

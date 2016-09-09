@@ -33,27 +33,9 @@ public class GitHubDetails {
    * @param oAuthToken The OAuth token to include with request(s)
    */
   public GitHubDetails(String repositoryOwner, String repositoryName, String oAuthToken) {
-    this.repositoryOwner = validateParameterNullOrEmpty("repositoryOwner", repositoryOwner);
-    this.repositoryName = validateParameterNullOrEmpty("repositoryName", repositoryName);
-    this.oAuthToken = validateParameterEmpty("oAuthToken", oAuthToken);
-  }
-
-  private static String validateParameterNullOrEmpty(String parameter, String value) {
-    if (null == value || value.isEmpty()) {
-      String errorMessage = String.format("Provided parameter '%s' must not be null or empty. Provided value was '%s'.", parameter, value);
-      throw new IllegalArgumentException(errorMessage);
-    }
-
-    return value;
-  }
-
-  private static String validateParameterEmpty(String parameter, String value) {
-    if (null != value && value.isEmpty()) {
-      String errorMessage = String.format("Provided parameter '%s' must not be empty.", parameter);
-      throw new IllegalArgumentException(errorMessage);
-    }
-
-    return value;
+    this.repositoryOwner = repositoryOwner;
+    this.repositoryName = repositoryName;
+    this.oAuthToken = oAuthToken;
   }
 
   public String getRepositoryOwner() {

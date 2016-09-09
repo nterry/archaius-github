@@ -1,12 +1,12 @@
 package io.github.nterry.archaius.github.config;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpResponseException;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.apache.ApacheHttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -77,19 +77,29 @@ public class GitHubGistConfigurationSource extends AbstractGitHubConfigurationSo
 
   @Override
   PollResult executeRequest(HttpRequest request, GitHubConfigurationCheckpoint checkpoint) throws IOException {
-    GitHubGist gitHubGist = request.execute().parseAs(GitHubGist.class);
+    try {
+      GitHubGist gitHubGist = request.execute().parseAs(GitHubGist.class);
 
-    if (null == getContentPath() || !gitHubGist.getFiles().containsKey(getContentPath())) {
-      String errorMessage = String.format("Configuration file specified '%s' does not appear to exist in gist '%s'.",
-          getContentPath(), gistId);
 
-      LOG.error(errorMessage);
-      throw new FileNotFoundException(errorMessage);
+      if (!gitHubGist.getFiles().containsKey(getContentPath())) {
+        String errorMessage = String.format("Configuration file specified '%s' does not appear to exist in gist '%s'.",
+            getContentPath(), gistId);
+
+        LOG.error(errorMessage);
+        throw new IOException(errorMessage);
+      }
+
+      String fileContent = gitHubGist.getFiles().get(getContentPath()).getContent();
+      Map<String, Object> parsedProps = parseProperties(new ByteArrayInputStream(fileContent.getBytes()));
+
+      return PollResult.createFull(parsedProps);
     }
+    catch (HttpResponseException ex) {
+      String errorMessage = String.format("Failed to get specified configuration file at '%s'. Response was '%d - %s'.",
+          getContentPath(), ex.getStatusCode(), ex.getContent());
 
-    String fileContent = gitHubGist.getFiles().get(getContentPath()).getContent();
-    Map<String, Object> parsedProps = parseProperties(new ByteArrayInputStream(fileContent.getBytes()));
-
-    return PollResult.createFull(parsedProps);
+      LOG.error(errorMessage, ex);
+      throw new IOException(errorMessage, ex);
+    }
   }
 }
