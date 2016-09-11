@@ -1,6 +1,8 @@
 Archaius configuration source for GitHub
 ========================================
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.nterry/archaius-github.svg?maxAge=2592000)](https://img.shields.io/maven-central/v/io.github.nterry/archaius-github.svg?maxAge=2592000)&nbsp;&nbsp;&nbsp;&nbsp;[![Travis](https://img.shields.io/travis/nterry/archaius-github.svg?maxAge=2592000)](https://img.shields.io/travis/nterry/archaius-github.svg?maxAge=2592000)
+
 Overview
 --------
 This project provides an implementation of

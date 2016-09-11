@@ -7,7 +7,7 @@
   <groupId>io.github.nterry</groupId>
   <artifactId>archaius-github</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.0</version>
+  <version>1.1.0-SNAPSHOT</version>
 
   <name>Archaius Github :: Parent</name>
   <description>A configuration source for Archaius using GitHub</description>
