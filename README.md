@@ -1,7 +1,7 @@
 Archaius configuration source for GitHub
 ========================================
 
-[![Travis](https://img.shields.io/travis/nterry/archaius-github.svg?maxAge=2592000)](https://img.shields.io/travis/nterry/archaius-github.svg?maxAge=2592000)&nbsp;&nbsp;&nbsp;&nbsp;[![Maven Central](https://img.shields.io/maven-central/v/io.github.nterry/archaius-github.svg?maxAge=2592000)](https://search.maven.org/#search%7Cga%7C1%7Cio.github.nterry)&nbsp;&nbsp;&nbsp;&nbsp;[![SonarQube Coverage](https://img.shields.io/sonar/http/sonarqube.com/io.github.nterry:archaius-github/coverage.svg?maxAge=2592000)](https://sonarqube.com/overview?id=io.github.nterry%3Aarchaius-github)&nbsp;&nbsp;&nbsp;&nbsp;[![SonarQube Tech Debt](https://img.shields.io/sonar/http/sonarqube.com/io.github.nterry:archaius-github/tech_debt.svg?maxAge=2592000)](https://sonarqube.com/overview?id=io.github.nterry%3Aarchaius-github)
+[![Travis](https://img.shields.io/travis/nterry/archaius-github.svg?maxAge=2592000)](https://travis-ci.org/nterry/archaius-github)&nbsp;&nbsp;&nbsp;&nbsp;[![Maven Central](https://img.shields.io/maven-central/v/io.github.nterry/archaius-github.svg?maxAge=2592000)](https://search.maven.org/#search%7Cga%7C1%7Cio.github.nterry)&nbsp;&nbsp;&nbsp;&nbsp;[![SonarQube Coverage](https://img.shields.io/sonar/http/sonarqube.com/io.github.nterry:archaius-github/coverage.svg?maxAge=2592000)](https://sonarqube.com/overview?id=io.github.nterry%3Aarchaius-github)&nbsp;&nbsp;&nbsp;&nbsp;[![SonarQube Tech Debt](https://img.shields.io/sonar/http/sonarqube.com/io.github.nterry:archaius-github/tech_debt.svg?maxAge=2592000)](https://sonarqube.com/overview?id=io.github.nterry%3Aarchaius-github)
 
 Overview
 --------
