@@ -3,7 +3,7 @@ package io.github.nterry.archaius.github.config;
 import java.io.IOException;
 
 import com.google.api.client.http.*;
-import com.google.api.client.http.apache.ApacheHttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 import com.netflix.config.PollResult;
@@ -27,7 +27,7 @@ public class GitHubRepositoryConfigurationSource extends AbstractGitHubConfigura
    * @throws IllegalArgumentException If any inputs are null or invalid
    */
   public GitHubRepositoryConfigurationSource(GitHubDetails gitHubDetails, String contentPath) {
-    this(gitHubDetails, contentPath, new ApacheHttpTransport(), GsonFactory.getDefaultInstance());
+    this(gitHubDetails, contentPath, new NetHttpTransport(), GsonFactory.getDefaultInstance());
   }
 
   /**

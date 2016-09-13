@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import javax.xml.bind.DatatypeConverter;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpHeaders;
@@ -15,7 +16,6 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.JsonObjectParser;
 import com.netflix.config.PollResult;
-import org.apache.commons.codec.binary.Base64;
 
 
 abstract class AbstractGitHubConfigurationSource {
@@ -87,7 +87,7 @@ abstract class AbstractGitHubConfigurationSource {
   }
 
   Map<String, Object> decode(String encodedResponse) throws IOException {
-    return parseProperties(new ByteArrayInputStream(Base64.decodeBase64(encodedResponse)));
+    return parseProperties(new ByteArrayInputStream(decodeBase64(encodedResponse)));
   }
 
   Map<String, Object> parseProperties(InputStream propertiesInputStream) throws IOException {
@@ -103,4 +103,9 @@ abstract class AbstractGitHubConfigurationSource {
   abstract GenericUrl getUrl();
 
   abstract PollResult executeRequest(HttpRequest request, GitHubConfigurationCheckpoint checkpoint) throws IOException;
+
+
+  private byte[] decodeBase64(String encodedString) {
+    return DatatypeConverter.parseBase64Binary(encodedString);
+  }
 }
