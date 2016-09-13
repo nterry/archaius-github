@@ -1,7 +1,7 @@
 Archaius configuration source for GitHub
 ========================================
 
-[![Travis](https://img.shields.io/travis/nterry/archaius-github.svg?maxAge=2592000)](https://travis-ci.org/nterry/archaius-github)&nbsp;&nbsp;&nbsp;&nbsp;[![Maven Central](https://img.shields.io/maven-central/v/io.github.nterry/archaius-github.svg?maxAge=2592000)](https://search.maven.org/#search%7Cga%7C1%7Cio.github.nterry)&nbsp;&nbsp;&nbsp;&nbsp;[![SonarQube Coverage](https://img.shields.io/sonar/http/sonarqube.com/io.github.nterry:archaius-github/coverage.svg?maxAge=2592000)](https://sonarqube.com/overview?id=io.github.nterry%3Aarchaius-github)&nbsp;&nbsp;&nbsp;&nbsp;[![SonarQube Tech Debt](https://img.shields.io/sonar/http/sonarqube.com/io.github.nterry:archaius-github/tech_debt.svg?maxAge=2592000)](https://sonarqube.com/overview?id=io.github.nterry%3Aarchaius-github)
+[![Travis](https://travis-ci.org/nterry/archaius-github.svg?branch=master)](https://travis-ci.org/nterry/archaius-github)&nbsp;&nbsp;&nbsp;&nbsp;[![Maven Central](https://img.shields.io/maven-central/v/io.github.nterry/archaius-github.svg?maxAge=2592000)](https://search.maven.org/#search%7Cga%7C1%7Cio.github.nterry)&nbsp;&nbsp;&nbsp;&nbsp;[![SonarQube Coverage](https://img.shields.io/sonar/http/sonarqube.com/io.github.nterry:archaius-github/coverage.svg?maxAge=2592000)](https://sonarqube.com/overview?id=io.github.nterry%3Aarchaius-github)&nbsp;&nbsp;&nbsp;&nbsp;[![SonarQube Tech Debt](https://img.shields.io/sonar/http/sonarqube.com/io.github.nterry:archaius-github/tech_debt.svg?maxAge=2592000)](https://sonarqube.com/overview?id=io.github.nterry%3Aarchaius-github)
 
 Overview
 --------
@@ -33,14 +33,15 @@ your logging.properties file:
 
     handlers = org.slf4j.bridge.SLF4JBridgeHandler
     
-If you do not have a logging.properties, simply put the following into your bootstrap code (App.main() or otherwise):
+If you do not have a logging.properties, and you want to include the http client logs, simply put the following into 
+your bootstrap code (App.main() or otherwise):
 
     SLF4JBridgeHandler.removeHandlersForRootLogger();
     SLF4JBridgeHandler.install();
     
-Finally, there is a HUGE performance penalty in logging. Fortunately, there is a simple way to fix the problem that
-causes said penalty. Simply put the following into your logback.xml (Assuming you use logback. If you dont, look
-up the equivalent for your logging framework):
+Finally, there is a HUGE performance penalty in logging if you use the bridge handler above. Fortunately, there is a
+simple way to fix the problem that causes said penalty. Simply put the following into your logback.xml (Assuming you
+use logback. If you dont, look up the equivalent for your logging framework):
 
     <?xml version="1.0" encoding="UTF-8"?>
     <configuration>
