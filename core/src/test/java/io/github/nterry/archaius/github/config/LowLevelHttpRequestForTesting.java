@@ -1,10 +1,10 @@
 package io.github.nterry.archaius.github.config;
 
-import java.io.IOException;
-import java.util.Map;
-
 import com.google.api.client.http.LowLevelHttpRequest;
 import com.google.api.client.http.LowLevelHttpResponse;
+
+import java.io.IOException;
+import java.util.Map;
 
 class LowLevelHttpRequestForTesting extends LowLevelHttpRequest {
 

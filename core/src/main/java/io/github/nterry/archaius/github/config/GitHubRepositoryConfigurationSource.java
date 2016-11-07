@@ -1,7 +1,5 @@
 package io.github.nterry.archaius.github.config;
 
-import java.io.IOException;
-
 import com.google.api.client.http.*;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -9,6 +7,8 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.netflix.config.PollResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 /**
  * An implementation of {@link GitHubConfigurationSource} that uses a traditional repository for the configuration.
@@ -40,7 +40,9 @@ public class GitHubRepositoryConfigurationSource extends AbstractGitHubConfigura
    * @param jsonFactory The {@link JsonFactory} to use for deserialization
    * @throws IllegalArgumentException If any inputs are null or invalid
    */
-  public GitHubRepositoryConfigurationSource(GitHubDetails gitHubDetails, String contentPath, HttpTransport httpTransport, JsonFactory jsonFactory) {
+  public GitHubRepositoryConfigurationSource(GitHubDetails gitHubDetails, String contentPath,
+                                             HttpTransport httpTransport, JsonFactory jsonFactory) {
+
     super(gitHubDetails, contentPath, httpTransport, jsonFactory);
   }
 
@@ -51,8 +53,9 @@ public class GitHubRepositoryConfigurationSource extends AbstractGitHubConfigura
 
   @Override
   GenericUrl getUrl() {
-    return new GenericUrl(String.format("%s/repos/%s/%s/contents/%s%s", API_URL_PREFIX, getGitHubDetails().getRepositoryOwner(),
-        getGitHubDetails().getRepositoryName(), getContentPath(), generateQueryParamsString()));
+    return new GenericUrl(String.format("%s/repos/%s/%s/contents/%s%s", API_URL_PREFIX,
+        getGitHubDetails().getRepositoryOwner(), getGitHubDetails().getRepositoryName(),
+        getContentPath(), generateQueryParamsString()));
   }
 
   @Override

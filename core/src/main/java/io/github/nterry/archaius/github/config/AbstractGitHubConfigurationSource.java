@@ -1,14 +1,5 @@
 package io.github.nterry.archaius.github.config;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-import javax.xml.bind.DatatypeConverter;
-
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpRequest;
@@ -16,6 +7,15 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.JsonObjectParser;
 import com.netflix.config.PollResult;
+
+import javax.xml.bind.DatatypeConverter;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 
 abstract class AbstractGitHubConfigurationSource {
@@ -31,7 +31,9 @@ abstract class AbstractGitHubConfigurationSource {
   private final HttpTransport httpTransport;
   private final JsonFactory jsonFactory;
 
-  AbstractGitHubConfigurationSource(GitHubDetails gitHubDetails, String contentPath, HttpTransport httpTransport, JsonFactory jsonFactory) {
+  AbstractGitHubConfigurationSource(GitHubDetails gitHubDetails, String contentPath, HttpTransport httpTransport,
+                                    JsonFactory jsonFactory) {
+
     this.gitHubDetails = gitHubDetails;
     this.contentPath = sanitizeContentPath(contentPath);
     this.httpTransport = httpTransport;

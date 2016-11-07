@@ -7,7 +7,7 @@
   <groupId>io.github.nterry</groupId>
   <artifactId>archaius-github</artifactId>
   <packaging>pom</packaging>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
 
   <name>Archaius Github :: Parent</name>
   <description>A configuration source for Archaius using GitHub</description>
@@ -53,7 +53,7 @@
 
     <java.version>1.7</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <sonar.coverage.exclusions>**/*model*</sonar.coverage.exclusions>
+    <sonar.coverage.exclusions>**/*model*,**/*Factory.*</sonar.coverage.exclusions>
   </properties>
 
   <dependencyManagement>

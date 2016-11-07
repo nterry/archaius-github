@@ -1,13 +1,13 @@
 package io.github.nterry.archaius.github.config;
 
+import com.google.api.client.http.LowLevelHttpResponse;
+import org.apache.commons.io.IOUtils;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.google.api.client.http.LowLevelHttpResponse;
-import org.apache.commons.io.IOUtils;
 
 
 public class LowLevelHttpResponseForTesting extends LowLevelHttpResponse {

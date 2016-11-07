@@ -1,9 +1,5 @@
 package io.github.nterry.archaius.github.config;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.Map;
-
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpResponseException;
@@ -14,6 +10,10 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.netflix.config.PollResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.Map;
 
 /**
  * An implementation of {@link GitHubConfigurationSource} that uses a gist for the configuration.
@@ -39,8 +39,7 @@ public class GitHubGistConfigurationSource extends AbstractGitHubConfigurationSo
   }
 
   /**
-   * Creates an instance with the provided gist id and file name.
-   * Assumes anonymous access to the gist.
+   * Creates an instance with the provided gist id, file name, and OAuth token.
    *
    * @param gistId The id of the gist. Must not be null
    * @param contentPath The path/to/filename in the repo to get for configuration
@@ -51,8 +50,7 @@ public class GitHubGistConfigurationSource extends AbstractGitHubConfigurationSo
   }
 
   /**
-   * Creates an instance with the provided gist id and file name.
-   * Use this if you need to access a private gist.
+   * Creates an instance with the provided gist id, file name, OAuth token, {@link HttpTransport} implementation, and {@link JsonFactory} implementation.
    *
    * @param gistId The id of the gist
    * @param contentPath The file name to get for configuration
@@ -60,7 +58,9 @@ public class GitHubGistConfigurationSource extends AbstractGitHubConfigurationSo
    * @param httpTransport The underlying {@link HttpTransport} implementation to use for requests
    * @param jsonFactory The {@link JsonFactory} to use for deserialization
    */
-  public GitHubGistConfigurationSource(String gistId, String contentPath, String oAuthToken, HttpTransport httpTransport, JsonFactory jsonFactory) {
+  public GitHubGistConfigurationSource(String gistId, String contentPath, String oAuthToken,
+                                       HttpTransport httpTransport, JsonFactory jsonFactory) {
+
     super(new GitHubDetails("", "", oAuthToken), contentPath, httpTransport, jsonFactory);
     this.gistId = gistId;
   }

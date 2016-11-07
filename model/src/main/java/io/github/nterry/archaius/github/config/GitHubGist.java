@@ -1,9 +1,9 @@
 package io.github.nterry.archaius.github.config;
 
+import com.google.api.client.util.Key;
+
 import java.util.List;
 import java.util.Map;
-
-import com.google.api.client.util.Key;
 
 public class GitHubGist {
 
@@ -52,12 +52,11 @@ public class GitHubGist {
   @Key("git_push_url")
   private String gitPushUrl;
 
-  // TODO: Need to fins a way to get google's JsonFactory to deserialize this type...
-//  @Key("created_at")
-//  private DateTime createdAt;
-//
-//  @Key("updated_at")
-//  private DateTime updatedAt;
+  @Key("created_at")
+  private String createdAt;
+
+  @Key("updated_at")
+  private String updatedAt;
 
   @Key
   private List<GitHubUser> forks;
@@ -186,21 +185,21 @@ public class GitHubGist {
     this.gitPushUrl = gitPushUrl;
   }
 
-//  DateTime getCreatedAt() {
-//    return createdAt;
-//  }
-//
-//  void setCreatedAt(DateTime createdAt) {
-//    this.createdAt = createdAt;
-//  }
-//
-//  DateTime getUpdatedAt() {
-//    return updatedAt;
-//  }
-//
-//  void setUpdatedAt(DateTime updatedAt) {
-//    this.updatedAt = updatedAt;
-//  }
+  String getCreatedAt() {
+    return createdAt;
+  }
+
+  void setCreatedAt(String createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  String getUpdatedAt() {
+    return updatedAt;
+  }
+
+  void setUpdatedAt(String updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 
   List<GitHubUser> getForks() {
     return forks;
@@ -244,10 +243,10 @@ public class GitHubGist {
                                             (getHtmlUrl() != null ? getHtmlUrl().equals(that.getHtmlUrl()) : that.getHtmlUrl() == null &&
                                                 (getGitPullUrl() != null ? getGitPullUrl().equals(that.getGitPullUrl()) : that.getGitPullUrl() == null &&
                                                     (getGitPushUrl() != null ? getGitPushUrl().equals(that.getGitPushUrl()) : that.getGitPushUrl() == null &&
-//                                                        (getCreatedAt() != null ? getCreatedAt().equals(that.getCreatedAt()) : that.getCreatedAt() == null &&
-//                                                            (getUpdatedAt() != null ? getUpdatedAt().equals(that.getUpdatedAt()) : that.getUpdatedAt() == null &&
-                                                        (getForks() != null ? getForks().equals(that.getForks()) : that.getForks() == null &&
-                                                            (getHistory() != null ? getHistory().equals(that.getHistory()) : that.getHistory() == null))))))))))))));
+                                                        (getCreatedAt() != null ? getCreatedAt().equals(that.getCreatedAt()) : that.getCreatedAt() == null &&
+                                                            (getUpdatedAt() != null ? getUpdatedAt().equals(that.getUpdatedAt()) : that.getUpdatedAt() == null &&
+                                                                (getForks() != null ? getForks().equals(that.getForks()) : that.getForks() == null &&
+                                                                    (getHistory() != null ? getHistory().equals(that.getHistory()) : that.getHistory() == null))))))))))))))));
 
   }
 
@@ -268,8 +267,8 @@ public class GitHubGist {
     result = 31 * result + (getHtmlUrl() != null ? getHtmlUrl().hashCode() : 0);
     result = 31 * result + (getGitPullUrl() != null ? getGitPullUrl().hashCode() : 0);
     result = 31 * result + (getGitPushUrl() != null ? getGitPushUrl().hashCode() : 0);
-//    result = 31 * result + (getCreatedAt() != null ? getCreatedAt().hashCode() : 0);
-//    result = 31 * result + (getUpdatedAt() != null ? getUpdatedAt().hashCode() : 0);
+    result = 31 * result + (getCreatedAt() != null ? getCreatedAt().hashCode() : 0);
+    result = 31 * result + (getUpdatedAt() != null ? getUpdatedAt().hashCode() : 0);
     result = 31 * result + (getForks() != null ? getForks().hashCode() : 0);
     result = 31 * result + (getHistory() != null ? getHistory().hashCode() : 0);
     return result;

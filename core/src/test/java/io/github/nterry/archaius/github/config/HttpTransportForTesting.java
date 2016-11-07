@@ -1,9 +1,9 @@
 package io.github.nterry.archaius.github.config;
 
-import java.io.IOException;
-
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.LowLevelHttpRequest;
+
+import java.io.IOException;
 
 class HttpTransportForTesting extends HttpTransport {
 
